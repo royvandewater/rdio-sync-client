@@ -11,11 +11,12 @@ gulp.task 'coffee:compile', ->
   configFile = "./config/#{environment}.coffee"
 
   files = [
+    configFile
+    'config/config.coffee'
     './app/models/*.coffee'
     './app/collections/*.coffee'
     './app/views/*.coffee'
     './app/router.coffee'
-    configFile
   ]
 
   gulp.src files
@@ -37,7 +38,7 @@ gulp.task 'webserver', ->
   gulp.src './public'
       .pipe webserver({
         host: '0.0.0.0'
-        port: 8888
+        port: 3005
         livereload: false
         directoryListing: false
         open: false
