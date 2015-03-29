@@ -5,18 +5,18 @@ plumber    = require 'gulp-plumber'
 sourcemaps = require 'gulp-sourcemaps'
 webserver  = require 'gulp-webserver'
 
-gulp.task 'coffee:compile', ->
+gulp.task 'cjsx:compile', ->
   environment = process.env.NODE_ENV ? 'development'
-  configFile = "./config/#{environment}.coffee"
+  configFile = "./config/#{environment}.cjsx"
 
   files = [
     configFile
-    'config/config.coffee'
-    './app/models/*.coffee'
-    './app/collections/*.coffee'
+    'config/config.cjsx'
+    './app/models/*.cjsx'
+    './app/collections/*.cjsx'
     './app/templates/*.cjsx'
-    './app/views/*.coffee'
-    './app/router.coffee'
+    './app/views/*.cjsx'
+    './app/router.cjsx'
   ]
 
   gulp.src files
@@ -38,7 +38,7 @@ gulp.task 'webserver', ->
         fallback: 'index.html'
       })
 
-gulp.task 'default', ['coffee:compile'], ->
+gulp.task 'default', ['cjsx:compile'], ->
 
 gulp.task 'watch', ['default', 'webserver'], ->
-  gulp.watch ['./app/**/*.coffee', './app/templates/*.cjsx', './config/**/*.coffee'], ['coffee:compile']
+  gulp.watch ['./app/**/*.cjsx', './config/**/*.cjsx'], ['cjsx:compile']
