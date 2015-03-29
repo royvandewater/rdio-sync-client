@@ -40,14 +40,14 @@ AccountForm = React.createClass render: ->
 
     <form className="form-horizontal">
       <div className="form-group">
-        <label className="control-label col-md-2" for="number-of-tracks-<%= @props.model.id %>">Number of tracks:</label>
+        <label className="control-label col-md-2" htmlFor="number-of-tracks-<%= @props.model.id %>">Number of tracks:</label>
         <div className="col-md-10">
           <input type="number" name="number-of-tracks" id="number-of-tracks-<%= @props.model.id %>" className="form-control" />
         </div>
       </div>
 
       <div className="form-group">
-        <label className="control-label col-md-2" for="sync-type-<%= @props.model.id %>">Sync your:</label>
+        <label className="control-label col-md-2" htmlFor="sync-type-<%= @props.model.id %>">Sync your:</label>
         <div className="col-md-10">
           <select name="sync-type" id="sync-type-<%= @props.model.id %>" className="form-control">
             <option value="playCount">Most played tracks</option>
