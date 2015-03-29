@@ -2,21 +2,31 @@ class Router extends Backbone.Router
   routes:
     '': 'landing'
     'account': 'account'
+    'logout': 'logout'
 
   landing: =>
-    view = new LandingView
-    $('#main-container').html view.render()
+    AccountModel.checkAuth (loggedIn) =>
+      return @navigate '/account', trigger: true if loggedIn
+
+      view = new LandingView
+      $('#main-container').html view.render()
+      $('li.logout').hide()
 
   account: =>
-    account = new AccountModel
-    view = new AccountView model: account
-    $('#main-container').html view.render()
+    AccountModel.checkAuth (loggedIn) =>
+      return @navigate '/', trigger: true unless loggedIn
 
-    account.fetch()
+      account = new AccountModel
+      view = new AccountView model: account
+      $('#main-container').html view.render()
+      $('li.logout').show()
 
-router = new Router
+      account.fetch()
 
-AccountModel.checkAuth (loggedIn) =>
-  Backbone.history.start pushState: true
-  route = if loggedIn then '/account' else '/'
-  router.navigate route, trigger: true
+  logout: =>
+    session = new SessionModel
+    session.once 'destroy', => @navigate '/', trigger: true
+    session.destroy wait: true
+
+new Router
+Backbone.history.start pushState: true
