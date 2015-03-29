@@ -4,14 +4,15 @@ class Router extends Backbone.Router
     'account': 'account'
 
   landing: =>
-
     view = new LandingView
     $('#main-container').html view.render()
 
   account: =>
     account = new AccountModel
-    account.fetch
-    $('#main-container').html '<h1>Logged in</h1>'
+    view = new AccountView model: account
+    $('#main-container').html view.render()
+
+    account.fetch()
 
 router = new Router
 
