@@ -20,7 +20,8 @@ RUN npm install -g gulp
 
 COPY . rdio-sync-client
 WORKDIR rdio-sync-client
-RUN npm install
+RUN npm install --no-color --production 
 RUN gulp
 RUN rm -rf /usr/share/nginx/html
+RUN cp .docker/default.conf /etc/nginx/conf.d/default.conf
 RUN cp -r public /usr/share/nginx/html
